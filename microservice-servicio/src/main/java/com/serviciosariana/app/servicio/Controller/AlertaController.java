@@ -71,4 +71,10 @@ public class AlertaController {
         alertaService.marcarResuelta(nAlertaId, request.getNUsuarioId());
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/enviar-notificaciones")
+    public ResponseEntity<Map<String, Integer>> enviarNotificaciones() {
+        Integer enviados = alertaService.enviarNotificacionesPendientes();
+        return ResponseEntity.ok(Map.of("nCorreosEnviados", enviados));
+    }
 }

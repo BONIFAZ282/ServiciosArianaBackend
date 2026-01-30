@@ -9,4 +9,7 @@ public class StoredProcedureAlerta {
     public static final String SP_OBTENER_POR_ID = "{CALL PA_Alerta_Get_PorId(?)}";
     public static final String SP_MARCAR_RESUELTA = "{CALL PA_Alerta_Upd_MarcarResuelta(?, ?)}";
 
+    public static final String SP_PENDIENTES_NOTIFICACION = "{CALL PA_Alerta_Lst_PendientesNotificacion}";
+    public static final String SP_MARCAR_NOTIFICADA = "{CALL PA_Alerta_Upd_MarcarNotificada(?)}";
+
 }

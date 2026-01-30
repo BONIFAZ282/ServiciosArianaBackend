@@ -1,6 +1,7 @@
 package com.serviciosariana.app.servicio.Services;
 
 import com.serviciosariana.app.servicio.Model.dto.AlertaDTO;
+import com.serviciosariana.app.servicio.Model.dto.AlertaNotificacionDTO;
 import com.serviciosariana.app.servicio.Model.dto.ContadorAlertasDTO;
 import java.util.List;
 
@@ -19,5 +20,11 @@ public interface AlertaService {
     AlertaDTO obtenerPorId(Integer nAlertaId);
 
     void marcarResuelta(Integer nAlertaId, Integer nUsuarioId);
+
+    List<AlertaNotificacionDTO> listarPendientesNotificacion();
+
+    void marcarNotificada(Integer nAlertaId);
+
+    Integer enviarNotificacionesPendientes();
 
 }

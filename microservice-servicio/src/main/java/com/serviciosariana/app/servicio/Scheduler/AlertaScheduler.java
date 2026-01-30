@@ -1,6 +1,7 @@
 package com.serviciosariana.app.servicio.Scheduler;
 
 import com.serviciosariana.app.servicio.Services.AlertaService;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +19,39 @@ public class AlertaScheduler {
     @Autowired
     private AlertaService alertaService;
 
+    @PostConstruct
+    public void init() {
+        log.info("============================================");
+        log.info("AlertaScheduler INICIADO - Tareas programadas activas");
+        log.info("============================================");
+    }
     /**
      * Genera alertas automáticas todos los días a las 6:00 AM
      * Cron: segundos minutos horas día-mes mes día-semana
      */
     //@Scheduled(cron = "0 * * * * ?")
     @Scheduled(cron = "0 0 6 * * ?")
-    public void generarAlertasAutomaticas() {
+    public void procesarAlertasYNotificaciones() {
         String fechaHora = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         log.info("========================================");
-        log.info("INICIO - Generación automática de alertas: {}", fechaHora);
+        log.info("INICIO - Proceso de alertas y notificaciones: {}", fechaHora);
 
         try {
+            // PASO 1: Generar alertas automáticas
+            log.info("Paso 1: Generando alertas automáticas...");
             Integer alertasGeneradas = alertaService.generarAutomaticas();
-            log.info("Alertas generadas exitosamente: {}", alertasGeneradas);
+            log.info("Alertas generadas: {}", alertasGeneradas);
+
+            // PASO 2: Enviar notificaciones por correo
+            log.info("Paso 2: Enviando notificaciones por correo...");
+            Integer correosEnviados = alertaService.enviarNotificacionesPendientes();
+            log.info("Correos enviados: {}", correosEnviados);
+
         } catch (Exception e) {
-            log.error("Error al generar alertas automáticas: {}", e.getMessage());
+            log.error("Error en proceso de alertas: {}", e.getMessage());
         }
 
-        log.info("FIN - Generación automática de alertas");
+        log.info("FIN - Proceso de alertas y notificaciones");
         log.info("========================================");
     }
 

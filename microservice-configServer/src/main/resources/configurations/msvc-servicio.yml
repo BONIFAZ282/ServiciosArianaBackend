@@ -9,6 +9,18 @@ spring:
     url: jdbc:sqlserver://localhost:1433;databaseName=DBARIANASERVICES;trustServerCertificate=true
     username: codel
     password: "123"
+  # Configuración de correo (DENTRO DE SPRING)
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: bonihd48@gmail.com
+    password: mtqrslogofxcmjli
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 eureka:
   instance:
@@ -16,3 +28,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+# Configuración personalizada
+app:
+  mail:
+    from: bonihd48@gmail.com
+    enabled: true

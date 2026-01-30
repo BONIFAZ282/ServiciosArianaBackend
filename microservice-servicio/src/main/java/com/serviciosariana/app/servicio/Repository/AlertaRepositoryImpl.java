@@ -1,7 +1,9 @@
 package com.serviciosariana.app.servicio.Repository;
 
 import com.serviciosariana.app.servicio.Model.dto.AlertaDTO;
+import com.serviciosariana.app.servicio.Model.dto.AlertaNotificacionDTO;
 import com.serviciosariana.app.servicio.Model.dto.ContadorAlertasDTO;
+import com.serviciosariana.app.servicio.Repository.RowMapper.AlertaNotificacionRowMapper;
 import com.serviciosariana.app.servicio.Repository.RowMapper.AlertaRowMapper;
 import com.serviciosariana.app.servicio.Repository.RowMapper.ContadorAlertasRowMapper;
 import com.serviciosariana.app.servicio.Repository.StoredProcedure.StoredProcedureAlerta;
@@ -24,6 +26,10 @@ public class AlertaRepositoryImpl implements AlertaRepository {
 
     @Autowired
     private ContadorAlertasRowMapper contadorAlertasRowMapper;
+
+    @Autowired
+    private AlertaNotificacionRowMapper alertaNotificacionRowMapper;
+
 
     @Override
     public Integer generarAutomaticas() {
@@ -85,5 +91,18 @@ public class AlertaRepositoryImpl implements AlertaRepository {
     @Override
     public void marcarResuelta(Integer nAlertaId, Integer nUsuarioId) {
         jdbcTemplate.queryForList(StoredProcedureAlerta.SP_MARCAR_RESUELTA, nAlertaId, nUsuarioId);
+    }
+
+    @Override
+    public List<AlertaNotificacionDTO> listarPendientesNotificacion() {
+        return jdbcTemplate.query(
+                StoredProcedureAlerta.SP_PENDIENTES_NOTIFICACION,
+                alertaNotificacionRowMapper
+        );
+    }
+
+    @Override
+    public void marcarNotificada(Integer nAlertaId) {
+        jdbcTemplate.update(StoredProcedureAlerta.SP_MARCAR_NOTIFICADA, nAlertaId);
     }
 }
