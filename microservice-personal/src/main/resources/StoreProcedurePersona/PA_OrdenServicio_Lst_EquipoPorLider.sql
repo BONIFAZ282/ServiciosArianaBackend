@@ -5,7 +5,6 @@ AS
 BEGIN
     SET NOCOUNT ON
 
-    -- Lista órdenes activas donde es líder con sus trabajadores asignados
     SELECT
         os.nOrdenServicioId,
         os.cOrdenServicioCod,

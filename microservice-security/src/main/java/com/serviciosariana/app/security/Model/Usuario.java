@@ -23,7 +23,6 @@ public class Usuario {
     private Boolean bPrimerAcceso;
     private Boolean bEstado;
 
-    // Datos del JOIN con Personal, Persona y Cargo
     private Integer nCargoId;
     private String cCargoCod;
     private String cCargoNombre;

@@ -24,7 +24,6 @@ public class UsuarioTranslator {
     private Boolean bPrimerAcceso;
     private Boolean bEstado;
 
-    // Datos del JOIN
     private Integer nCargoId;
     private String cCargoCod;
     private String cCargoNombre;

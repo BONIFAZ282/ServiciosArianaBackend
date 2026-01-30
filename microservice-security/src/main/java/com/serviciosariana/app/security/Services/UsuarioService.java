@@ -12,18 +12,14 @@ import java.util.Optional;
 
 public interface UsuarioService {
 
-    // Listados
     List<UsuarioListDTO> listarTodos();
 
-    // Obtener
     Optional<Usuario> obtenerPorId(Integer nUsuarioId);
     Optional<Usuario> obtenerPorUsuario(String cUsuario);
     BloqueoResponse verificarBloqueo(String cUsuario);
 
-    // Insertar
     Integer crear(Integer nPersonalId, String cUsuario, String cPassword);
 
-    // Actualizar
     void cambiarPassword(Integer nUsuarioId, String cPassword);
     void cambiarEstado(Integer nUsuarioId, Boolean bEstado);
     void desbloquear(Integer nUsuarioId);

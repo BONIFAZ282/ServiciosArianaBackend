@@ -95,8 +95,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         Usuario usuario = usuarioOpt.get();
 
-        if (!passwordEncoder.matches(cPassword, usuario.getCPassword())) {  // ← Cambiar aquí
-            // Registrar intento fallido
+        if (!passwordEncoder.matches(cPassword, usuario.getCPassword())) {
             IntentoFallidoResponse intento = usuarioRepository.registrarIntentoFallido(cUsuario);
 
             String mensaje = intento.getBBloqueado()
@@ -116,6 +115,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .cMensaje("Login exitoso")
                 .usuario(LoginResponse.Usuario.builder()
                         .nUsuarioId(usuario.getNUsuarioId())
+                        .nPersonalId(usuario.getNPersonalId())
                         .cUsuario(usuario.getCUsuario())
                         .cNombreCompleto(usuario.getCNombreCompleto())
                         .nCargoId(usuario.getNCargoId())

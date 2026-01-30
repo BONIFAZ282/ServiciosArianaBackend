@@ -20,6 +20,7 @@ public class LoginResponse {
     @AllArgsConstructor
     public static class Usuario {
         private Integer nUsuarioId;
+        private Integer nPersonalId;
         private String cUsuario;
         private String cNombreCompleto;
         private Integer nCargoId;
