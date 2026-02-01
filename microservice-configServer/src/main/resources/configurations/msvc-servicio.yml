@@ -9,12 +9,12 @@ spring:
     url: jdbc:sqlserver://localhost:1433;databaseName=DBARIANASERVICES;trustServerCertificate=true
     username: codel
     password: "123"
-  # Configuración de correo (DENTRO DE SPRING)
+  # Configuración de correo (SendGrid)
   mail:
-    host: smtp.gmail.com
+    host: smtp.sendgrid.net
     port: 587
-    username: bonihd48@gmail.com
-    password: mtqrslogofxcmjli
+    username: apikey
+    password: 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
     properties:
       mail:
         smtp:
