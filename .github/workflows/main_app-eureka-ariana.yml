@@ -7,13 +7,17 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'microservice-eureka/**'
+      - 'pom.xml'
+      - '.github/workflows/main_app-eureka-ariana.yml'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -25,20 +29,20 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests -f microservice-eureka/pom.xml
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/microservice-eureka/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
+      id-token: write
+      contents: read
   
     steps:
       - name: Download artifact from build job
@@ -60,4 +64,3 @@ jobs:
           app-name: 'app-eureka-ariana'
           slot-name: 'Production'
           package: '*.jar'
-          
