@@ -32,14 +32,20 @@ spring:
           uri: lb://msvc-security
           predicates:
             - Path=/api/security/**
+          filters:
+            - StripPrefix=2
         - id: msvc-personal
           uri: lb://msvc-personal
           predicates:
             - Path=/api/personal/**
+          filters:
+            - StripPrefix=2
         - id: msvc-servicio
           uri: lb://msvc-servicio
           predicates:
             - Path=/api/servicio/**
+          filters:
+            - StripPrefix=2
 
 eureka:
   instance:
