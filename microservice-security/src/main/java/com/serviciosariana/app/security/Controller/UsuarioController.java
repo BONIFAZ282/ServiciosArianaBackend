@@ -25,6 +25,17 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        LoginResponse response = usuarioService.login(request.getCUsuario(), request.getCPassword());
+
+        if (response.getBExitoso()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obtenerPorId(@PathVariable("id") Integer nUsuarioId) {
         return usuarioService.obtenerPorId(nUsuarioId)
@@ -90,14 +101,4 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
-        LoginResponse response = usuarioService.login(request.getCUsuario(), request.getCPassword());
-
-        if (response.getBExitoso()) {
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-        }
-    }
 }
