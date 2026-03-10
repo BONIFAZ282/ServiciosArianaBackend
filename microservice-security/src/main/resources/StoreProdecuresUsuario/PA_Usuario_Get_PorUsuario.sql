@@ -31,9 +31,9 @@ BEGIN
         p.cApellidoPaterno,
         p.cApellidoMaterno,
         p.cNombres + ' ' + p.cApellidoPaterno + ' ' + ISNULL(p.cApellidoMaterno, '') AS cNombreCompleto
-    FROM Usuario u
-    INNER JOIN Personal pe ON u.nPersonalId = pe.nPersonalId
-    INNER JOIN Persona p ON pe.nPersonaId = p.nPersonaId
-    INNER JOIN Cargo c ON pe.nCargoId = c.nCargoId
+    FROM Usuario u WITH(NOLOCK)
+    INNER JOIN Personal pe WITH(NOLOCK) ON u.nPersonalId = pe.nPersonalId
+    INNER JOIN Persona p WITH(NOLOCK) ON pe.nPersonaId = p.nPersonaId
+    INNER JOIN Cargo c WITH(NOLOCK) ON pe.nCargoId = c.nCargoId
     WHERE u.cUsuario = @cUsuario
 END

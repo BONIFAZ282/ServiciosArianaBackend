@@ -18,7 +18,7 @@ BEGIN
     SELECT
         @dFechaBloqueo = dFechaBloqueo,
         @bEstado = bEstado
-    FROM Usuario
+    FROM Usuario WITH(NOLOCK)
     WHERE cUsuario = @cUsuario
 
     IF @bEstado = 0

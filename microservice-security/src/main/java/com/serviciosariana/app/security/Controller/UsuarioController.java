@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/security/usuarios")
 public class UsuarioController {
+    // Versión 2.0 - Login endpoint fixed
 
     @Autowired
     private UsuarioService usuarioService;
