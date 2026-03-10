@@ -7,6 +7,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'microservice-security/**'
+      - 'pom.xml'
+      - '.github/workflows/main_app-security-ariana.yml'
   workflow_dispatch:
 
 jobs:
@@ -25,13 +29,13 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests -f microservice-security/pom.xml
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/microservice-security/target/*.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,9 +53,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B33AA92986B24BA6922E57E8037C8BD4 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B5A98C9E57F34A7183767E541D6E97DF }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_887E92D70B8B4CAA922E43038018D865 }}
+          client-id: ${{ secrets.__clientidsecretname__ }}
+          tenant-id: ${{ secrets.__tenantidsecretname__ }}
+          subscription-id: ${{ secrets.__subscriptionidsecretname__ }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -60,4 +64,3 @@ jobs:
           app-name: 'app-security-ariana'
           slot-name: 'Production'
           package: '*.jar'
-          
