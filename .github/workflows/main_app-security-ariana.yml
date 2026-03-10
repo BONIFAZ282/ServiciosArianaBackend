@@ -61,6 +61,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'app-security-ariana'
+          app-name: 'app-security-ariana-hnach2cmc2hfaccy'
           slot-name: 'Production'
           package: '*.jar'
