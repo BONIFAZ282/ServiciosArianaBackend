@@ -29,7 +29,7 @@ public class MenuController {
         return ResponseEntity.ok(menuService.listarPadres());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:[0-9]+}")
     public ResponseEntity<Menu> obtenerPorId(@PathVariable("id") Integer nMenuId) {
         return menuService.obtenerPorId(nMenuId)
                 .map(ResponseEntity::ok)

@@ -37,7 +37,7 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:[0-9]+}")
     public ResponseEntity<Usuario> obtenerPorId(@PathVariable("id") Integer nUsuarioId) {
         return usuarioService.obtenerPorId(nUsuarioId)
                 .map(ResponseEntity::ok)
