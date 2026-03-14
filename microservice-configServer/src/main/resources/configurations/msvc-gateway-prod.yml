@@ -32,17 +32,22 @@ spring:
           uri: lb://msvc-security
           predicates:
             - Path=/api/security/**
+          filters:
+            - PreserveHostHeader
 
         - id: msvc-personal
           uri: lb://msvc-personal
           predicates:
             - Path=/api/personal/**
+          filters:
+            - PreserveHostHeader
 
         - id: msvc-servicio
           uri: lb://msvc-servicio
           predicates:
             - Path=/api/servicio/**
-
+          filters:
+            - PreserveHostHeader
 eureka:
   instance:
     hostname: ${GATEWAY_HOSTNAME:app-gateway-ariana.azurewebsites.net}
