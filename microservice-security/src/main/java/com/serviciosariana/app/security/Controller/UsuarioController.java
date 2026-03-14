@@ -28,6 +28,11 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        System.out.println("========================================");
+        System.out.println("LOGIN ENDPOINT CALLED - METHOD: POST");
+        System.out.println("Usuario: " + request.getCUsuario());
+        System.out.println("========================================");
+
         LoginResponse response = usuarioService.login(request.getCUsuario(), request.getCPassword());
 
         if (response.getBExitoso()) {
